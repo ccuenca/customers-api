@@ -5,7 +5,6 @@ using CustomersTestApi.Model;
 using CustomersTestApi.Persistance.Repositories;
 using CustomersTestApi.Support;
 using MediatR;
-using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,11 +22,6 @@ namespace CustomersTestApi.Domain.Handlers
     private readonly ICustomersRepository _repository;
 
     /// <summary>
-    /// The general conf
-    /// </summary>
-    private readonly GeneralConf _generalConf;
-
-    /// <summary>
     /// The mapper
     /// </summary>
     private readonly IMapper _mapper;
@@ -37,18 +31,12 @@ namespace CustomersTestApi.Domain.Handlers
     /// </summary>
     /// <param name="mapper">The mapper.</param>
     /// <param name="repository">The repository.</param>
-    /// <param name="conf">The conf.</param>
-    /// <exception cref="ArgumentNullException">
-    /// mapper
-    /// or
-    /// conf
-    /// </exception>
+    /// <exception cref="ArgumentNullException">mapper</exception>
     /// <exception cref="ArgumentException">repository</exception>
-    public GetByIdCommandHandler(IMapper mapper, ICustomersRepository repository, IOptions<GeneralConf> conf)
+    public GetByIdCommandHandler(IMapper mapper, ICustomersRepository repository)
     {
       this._mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
       this._repository = repository ?? throw new ArgumentException(nameof(repository));
-      this._generalConf = conf.Value ?? throw new ArgumentNullException(nameof(conf));
     }
 
     /// <summary>

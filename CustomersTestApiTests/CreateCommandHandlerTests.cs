@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Xunit;
 
-namespace CustomersTestApiTestsUnitTest
+namespace CustomersTestApiUnitTest
 {
   /// <summary>
   /// 
@@ -46,11 +46,6 @@ namespace CustomersTestApiTestsUnitTest
     private readonly GeneralConf _conf;
 
     /// <summary>
-    /// The user identifier
-    /// </summary>
-    private int userId = 100;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="CreateCommandHandlerTests"/> class.
     /// </summary>
     public CreateCommandHandlerTests()
@@ -74,7 +69,7 @@ namespace CustomersTestApiTestsUnitTest
 
       _customerRepositoryMock.Setup(o => o.GetByIdentificacion(customerDto.IdentificationNumber, userId)).ReturnsAsync(existingCustomer);
 
-      var commandResultExpected = CommandResult.Fail(Messages.OBJECT_EXISTS, Constants.LOGIC_EXCEPTION_CODE,
+      var commandResultExpected = CommandResult.Fail(Messages.ObjectExists, Constants.LOGIC_EXCEPTION_CODE,
             $"CustomerIdentification: {command.Customer.IdentificationNumber}");
 
       //Act
@@ -100,7 +95,7 @@ namespace CustomersTestApiTestsUnitTest
 
       Customer customer = GetCustomer();
 
-      var commandResultExpected = CommandResult.Fail(Messages.OPERATION_NOT_SUCCESSFUL_MESSAGE, Constants.LOGIC_EXCEPTION_CODE, string.Empty);
+      var commandResultExpected = CommandResult.Fail(Messages.OperationNotSuccessfulMessage, Constants.LOGIC_EXCEPTION_CODE, string.Empty);
 
       _customerRepositoryMock.Setup(o => o.GetByIdentificacion(customerDto.IdentificationNumber, userId)).ReturnsAsync(existingCustomer);
       _customerRepositoryMock.Setup(o => o.Create(customer, userId)).ReturnsAsync(0);

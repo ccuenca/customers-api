@@ -12,14 +12,14 @@
         </member>
         <member name="M:CustomersTestApi.Controllers.Base.Error(System.String)">
             <summary>
-            Returns the error500.
+            Retornars the error500.
             </summary>
             <param name="message">The message.</param>
             <returns></returns>
         </member>
         <member name="M:CustomersTestApi.Controllers.Base.Error(System.String,System.String)">
             <summary>
-            Returns the error500.
+            Retornars the error500.
             </summary>
             <param name="code">The code.</param>
             <param name="message">The message.</param>
@@ -27,7 +27,7 @@
         </member>
         <member name="M:CustomersTestApi.Controllers.Base.Error(CustomersTestApi.Domain.Commands.CommandResult)">
             <summary>
-            Returns the error500.
+            Retornars the error500.
             </summary>
             <param name="result">The result.</param>
             <returns></returns>
@@ -56,7 +56,7 @@
             The cache
             </summary>
         </member>
-        <member name="F:CustomersTestApi.Controllers.CustomersController.cacheKey">
+        <member name="F:CustomersTestApi.Controllers.CustomersController.CacheKey">
             <summary>
             The cache key
             </summary>
@@ -82,9 +82,9 @@
         </member>
         <member name="M:CustomersTestApi.Controllers.CustomersController.Get(CustomersTestApi.Domain.Commands.GetAllCommand)">
             <summary>
-            Get all customers.
+            Gets the specified command.
             </summary>
-            <param name="command"></param>
+            <param name="command">The command.</param>
             <returns></returns>
         </member>
         <member name="M:CustomersTestApi.Controllers.CustomersController.Create(CustomersTestApi.Domain.Commands.CreateCommand)">
@@ -120,6 +120,11 @@
             <value>
             The name of the current user.
             </value>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.BaseCommand.ParametroPrueba1">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:CustomersTestApi.Domain.Commands.CommandResult">
             <summary>
@@ -453,28 +458,18 @@
             The repository
             </summary>
         </member>
-        <member name="F:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler._generalConf">
-            <summary>
-            The general conf
-            </summary>
-        </member>
         <member name="F:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler._mapper">
             <summary>
             The mapper
             </summary>
         </member>
-        <member name="M:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler.#ctor(AutoMapper.IMapper,CustomersTestApi.Persistance.Repositories.ICustomersRepository,Microsoft.Extensions.Options.IOptions{CustomersTestApi.Support.GeneralConf})">
+        <member name="M:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler.#ctor(AutoMapper.IMapper,CustomersTestApi.Persistance.Repositories.ICustomersRepository)">
             <summary>
             Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler"/> class.
             </summary>
             <param name="mapper">The mapper.</param>
             <param name="repository">The repository.</param>
-            <param name="conf">The conf.</param>
-            <exception cref="T:System.ArgumentNullException">
-            mapper
-            or
-            conf
-            </exception>
+            <exception cref="T:System.ArgumentNullException">mapper</exception>
             <exception cref="T:System.ArgumentException">repository</exception>
         </member>
         <member name="M:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler.Handle(CustomersTestApi.Domain.Commands.GetByIdCommand,System.Threading.CancellationToken)">
@@ -1013,7 +1008,7 @@
         </member>
         <member name="F:CustomersTestApi.Startup._env">
             <summary>
-            The Env
+            The env
             </summary>
         </member>
         <member name="M:CustomersTestApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
@@ -1073,17 +1068,12 @@
             
             </summary>
         </member>
-        <member name="M:CustomersTestApi.Support.Messages.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:CustomersTestApi.Support.Messages.OPERATION_NOT_SUCCESSFUL_MESSAGE">
+        <member name="F:CustomersTestApi.Support.Messages.OperationNotSuccessfulMessage">
             <summary>
             The operation not successful message
             </summary>
         </member>
-        <member name="F:CustomersTestApi.Support.Messages.OBJECT_EXISTS">
+        <member name="F:CustomersTestApi.Support.Messages.ObjectExists">
             <summary>
             The object exists
             </summary>
@@ -1103,14 +1093,19 @@
             The error starting application
             </summary>
         </member>
-        <member name="F:CustomersTestApi.Support.Messages.STARTING_APP">
+        <member name="F:CustomersTestApi.Support.Messages.PROCESSING_LOGIC_ERROR">
+            <summary>
+            The processing logic error
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.StartingApp">
             <summary>
             The starting application
             </summary>
         </member>
-        <member name="F:CustomersTestApi.Support.Messages.PROCESSING_LOGIC_ERROR">
+        <member name="F:CustomersTestApi.Support.Messages.CUSTOMER_CREATED">
             <summary>
-            The processing logic error
+            The customer created
             </summary>
         </member>
     </members>

@@ -28,7 +28,7 @@ namespace CustomersTestApi
     /// <value>
     /// The configuration.
     /// </value>
-    public IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; }
 
     /// <summary>
     /// The env
@@ -75,7 +75,7 @@ namespace CustomersTestApi
         mc.AddProfile(new MappingProfile());
       });
 
-      IMapper mapper = mappingConfig.CreateMapper();
+      var mapper = mappingConfig.CreateMapper();
       services.AddSingleton(mapper);
 
       services.AddScoped<ICustomersRepository, CustomersRepository>();
@@ -95,7 +95,7 @@ namespace CustomersTestApi
 
       services.AddSwaggerGen(c =>
       {
-        c.SwaggerDoc("v1", new OpenApiInfo()
+        c.SwaggerDoc("v1", new OpenApiInfo
         {
           Title = $"API {Configuration.GetSection("GeneralConf")["AppTitle"]}",
           Version = Configuration.GetSection("GeneralConf")["AppVersion"],
@@ -103,33 +103,32 @@ namespace CustomersTestApi
         });
 
         var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        var docsFileName = "CustomersTestApi.XML";
-        var commentsFile = Path.Combine(baseDirectory, docsFileName);
+        const string docsFileName = "CustomersTestApi.XML";
+        var commentsFile = Path.Combine(baseDirectory ?? throw new InvalidOperationException(), docsFileName);
 
         c.IncludeXmlComments(commentsFile);
 
-        if (Convert.ToBoolean(Configuration.GetSection("GeneralConf")["AppAuthorization"]))
+        if (!Convert.ToBoolean(Configuration.GetSection("GeneralConf")["AppAuthorization"])) return;
+        
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
-          c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-          {
-            Description = "Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-            Name = "Authorization",
-            In = ParameterLocation.Header,
-            Type = SecuritySchemeType.ApiKey
-          });
+          Description = "Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+          Name = "Authorization",
+          In = ParameterLocation.Header,
+          Type = SecuritySchemeType.ApiKey
+        });
 
 
-          c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
           {
+            new OpenApiSecurityScheme
             {
-              new OpenApiSecurityScheme
-              {
-                  Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
-              },
-              new string[] {}
-            }
-          });
-        }
+              Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+            },
+            new string[] {}
+          }
+        });
       });
 
       services.AddControllers();

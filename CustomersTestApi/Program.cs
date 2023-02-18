@@ -32,7 +32,7 @@ namespace CustomersTestApi
 
       var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile("appsettings.json", false)
                 .AddEnvironmentVariables()
                 .Build();
 
@@ -47,7 +47,7 @@ namespace CustomersTestApi
 
       try
       {
-        Log.Information(Messages.STARTING_APP);
+        Log.Information(Messages.StartingApp);
         CreateHostBuilder(args).Build().Run();
       }
       catch (Exception ex)

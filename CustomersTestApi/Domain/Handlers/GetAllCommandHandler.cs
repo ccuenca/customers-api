@@ -79,5 +79,7 @@ namespace CustomersTestApi.Domain.Handlers
         return CommandResult.Fail(ex.Message, Constants.LOGIC_EXCEPTION_CODE, ex.StackTrace);
       }
     }
+
+
   }
 }

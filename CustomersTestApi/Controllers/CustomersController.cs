@@ -34,7 +34,7 @@ namespace CustomersTestApi.Controllers
     /// <summary>
     /// The cache key
     /// </summary>
-    private readonly string cacheKey = "getall";
+    private const string CacheKey = "getall";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomersController"/> class.
@@ -69,10 +69,7 @@ namespace CustomersTestApi.Controllers
         {
           var commandResult = await this._mediator.Send(command);
 
-          if (commandResult.NoData)
-            return NotFound(new { command.Id });
-
-          return Ok(commandResult.Data);
+          return commandResult.NoData ? NotFound(new { command.Id }) : (ActionResult) Ok(commandResult.Data);
         }
         else
         {
@@ -86,9 +83,9 @@ namespace CustomersTestApi.Controllers
     }
 
     /// <summary>
-    /// Get all customers.
+    /// Gets the specified command.
     /// </summary>
-    /// <param name="command"></param>
+    /// <param name="command">The command.</param>
     /// <returns></returns>
     [Route("/api/Get")]
     [HttpGet]
@@ -101,20 +98,17 @@ namespace CustomersTestApi.Controllers
 
           Log.Information("GetAll");
           
-          var cacheResult = await _cache.GetStringAsync(cacheKey);
+          var cacheResult = await _cache.GetStringAsync(CacheKey);
 
           if (string.IsNullOrEmpty(cacheResult))
           {
             var commandResult = await this._mediator.Send(command);
 
-            if (commandResult.IsSuccess)
-            {
-              var serializedCustomers = JsonSerializer.Serialize((Collection)commandResult.Data);
-              await _cache.SetStringAsync(cacheKey, serializedCustomers);
-              return Ok(commandResult.Data);
-            }
-
-            return Error(commandResult);
+            if (!commandResult.IsSuccess) return Error(commandResult);
+            
+            var serializedCustomers = JsonSerializer.Serialize((Collection)commandResult.Data);
+            await _cache.SetStringAsync(CacheKey, serializedCustomers);
+            return Ok(commandResult.Data);
           }
 
           var deserializedCustomers = JsonSerializer.Deserialize<Collection>(cacheResult);
@@ -148,13 +142,9 @@ namespace CustomersTestApi.Controllers
         {
           var commandResult = await this._mediator.Send(command);
 
-          if (commandResult.IsSuccess)
-          {
-            await _cache.RemoveAsync(cacheKey);
-            return CreatedResource(nameof(GetById), commandResult);
-          }
-
-          return Error(commandResult);
+          if (!commandResult.IsSuccess) return Error(commandResult);
+          await _cache.RemoveAsync(CacheKey);
+          return CreatedResource(nameof(GetById), commandResult);
         }
         else
         {
@@ -187,13 +177,9 @@ namespace CustomersTestApi.Controllers
 
           var commandResult = await this._mediator.Send(command);
 
-          if (commandResult.IsSuccess)
-          {
-            await _cache.RemoveAsync(cacheKey);
-            return Ok(commandResult.Data);
-          }
-
-          return Error(commandResult);
+          if (!commandResult.IsSuccess) return Error(commandResult);
+          await _cache.RemoveAsync(CacheKey);
+          return Ok(commandResult.Data);
         }
         else
         {
@@ -226,13 +212,9 @@ namespace CustomersTestApi.Controllers
 
           var commandResult = await this._mediator.Send(command);
 
-          if (commandResult.IsSuccess)
-          {
-            await _cache.RemoveAsync(cacheKey);
-            return NoContent();
-          }
-
-          return Error(commandResult);
+          if (!commandResult.IsSuccess) return Error(commandResult);
+          await _cache.RemoveAsync(CacheKey);
+          return NoContent();
         }
         else
         {

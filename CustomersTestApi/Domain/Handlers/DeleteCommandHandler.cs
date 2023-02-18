@@ -70,7 +70,7 @@ namespace CustomersTestApi.Domain.Handlers
         var result = await _repository.Delete(request.CustomerId, request.UserId);
 
         if (result == 0)
-          return CommandResult.Fail(Messages.OPERATION_NOT_SUCCESSFUL_MESSAGE, Constants.LOGIC_EXCEPTION_CODE, string.Empty);
+          return CommandResult.Fail(Messages.OperationNotSuccessfulMessage, Constants.LOGIC_EXCEPTION_CODE, string.Empty);
 
         return CommandResult.Success(data: string.Empty);
       }

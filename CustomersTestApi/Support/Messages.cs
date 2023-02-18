@@ -3,28 +3,20 @@
   /// <summary>
   /// 
   /// </summary>
-  public class Messages
+  public static class Messages
   {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    protected Messages()
-    {
-
-    }
 
     #region Errors
 
     /// <summary>
     /// The operation not successful message
     /// </summary>
-    public static readonly string OPERATION_NOT_SUCCESSFUL_MESSAGE = "The operation can't be completed.";
+    public static readonly string OperationNotSuccessfulMessage = "The operation can't be completed.";
 
     /// <summary>
     /// The object exists
     /// </summary>
-    public static readonly string OBJECT_EXISTS = "The object can't be created.";
+    public static readonly string ObjectExists = "The object can't be created.";
 
     /// <summary>
     /// The object not found message
@@ -53,7 +45,7 @@
     /// <summary>
     /// The starting application
     /// </summary>
-    public static readonly string STARTING_APP = "Starting App";
+    public const string StartingApp = "Starting App";
 
 
     /// <summary>

@@ -8,6 +8,7 @@
     [PhoneNumber] NVARCHAR(50) NOT NULL,
     [Address] NVARCHAR(200) NOT NULL,
     [EmailAddress] NVARCHAR(200) NOT NULL, 
-    [IdentificationNumber] NVARCHAR(100) NOT NULL
+    [IdentificationNumber] NVARCHAR(100) NOT NULL, 
+    [EmailAddress2] NVARCHAR(200) NULL
   
 )

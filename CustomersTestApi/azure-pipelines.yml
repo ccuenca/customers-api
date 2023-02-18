@@ -1,28 +1,54 @@
-﻿# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
+﻿trigger:
 - master
 
 pool:
-  name: Azure Pipelines
   vmImage: 'windows-2019'
-  demands:
-  - msbuild
-  - visualstudio
 
 steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Use NuGet 5.6.0'
-  inputs:
-    versionSpec: 5.6.0
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
+- task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
+  displayName: 'Prepare analysis on SonarQube'
   inputs:
-    restoreSolution: '$(Parameters.solution)'
+    SonarQube: CustomersTestApiSonar
+    projectKey: 7e9cbaad50b360691e31a8e4a43e7990cce8de55
+    projectName: CustomersTestApi
+    extraProperties: |
+      sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
+
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+- task: VSBuild@1
+  displayName: 'Build solution CustomersTestApi'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: test
+    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true "/p:CoverletOutputFormat=\"cobertura,opencover\"'
+    projects: '**/*[Tt]ests/*.csproj'
+    nobuild: true
+
+- script: |
+    dotnet tool install -g dotnet-reportgenerator-globaltool
+    reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+  displayName: Create Code coverage report
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+
+- task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
+  displayName: 'Run Code Analysis'
+
+- task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@4
+  displayName: 'Publish Quality Gate Result'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
@@ -31,14 +57,14 @@ steps:
     arguments: '-r linux-x64 --output $(build.artifactstagingdirectory)'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish API Project'
+  displayName: 'Publish Artifact'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
     ArtifactName: ApiDrop
   condition: succeededOrFailed()
 
 - task: DeleteFiles@1
-  displayName: 'Delete API Files'
+  displayName: 'Delete Analysis files '
   inputs:
     SourceFolder: '$(build.artifactstagingdirectory)'
     Contents: '**'
@@ -53,23 +79,6 @@ steps:
     clean: true
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish SQL Project'
+  displayName: 'Publish Artifact: SqlDrop'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
     ArtifactName: SqlDrop
-  condition: succeededOrFailed()
-
-- task: DeleteFiles@1
-  displayName: 'Delete SQL Files'
-  inputs:
-    SourceFolder: '$(build.artifactstagingdirectory)'
-    Contents: '**'
-  enabled: false
-
-- task: PublishSymbols@2
-  displayName: 'Publish symbols path'
-  inputs:
-    SearchPattern: '**\bin\**\*.pdb'
-    PublishSymbols: false
-  enabled: false
-  continueOnError: true

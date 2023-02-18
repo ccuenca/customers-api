@@ -18,12 +18,9 @@ namespace CustomersTestApi.Domain.Commands
     public int UserId { get; set; }
 
     /// <summary>
-    /// Gets or sets the test parameter.
+    /// 
     /// </summary>
-    /// <value>
-    /// The test parameter.
-    /// </value>
-    public int TestParameter { get; set; }
+    public string ParametroPrueba1 { get; set; }
 
   }
 }

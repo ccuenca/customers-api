@@ -69,11 +69,11 @@ namespace CustomersTestApi.Domain.Handlers
 
         if (existingCustomer != null)
         {
-          Log.Information(Constants.LOGIC_EXCEPTION_CODE + "-" + Messages.OBJECT_EXISTS
+          Log.Information(Constants.LOGIC_EXCEPTION_CODE + "-" + Messages.ObjectExists
                           + $" - CustomerIdentification: {request.Customer.IdentificationNumber}"
                           + " - data: {@request} " + nameof(CreateCommandHandler), request);
 
-          return CommandResult.Fail(Messages.OBJECT_EXISTS, Constants.LOGIC_EXCEPTION_CODE,
+          return CommandResult.Fail(Messages.ObjectExists, Constants.LOGIC_EXCEPTION_CODE,
             $"CustomerIdentification: {request.Customer.IdentificationNumber}");
         }
 
@@ -81,11 +81,11 @@ namespace CustomersTestApi.Domain.Handlers
 
         if (result == 0)
         {
-          Log.Information(Constants.LOGIC_EXCEPTION_CODE + "-" + Messages.OPERATION_NOT_SUCCESSFUL_MESSAGE
+          Log.Information(Constants.LOGIC_EXCEPTION_CODE + "-" + Messages.OperationNotSuccessfulMessage
                           + $" - CustomerIdentification: {request.Customer.IdentificationNumber}"
                           + " - data: {@request} " + nameof(CreateCommandHandler), request);
 
-          return CommandResult.Fail(Messages.OPERATION_NOT_SUCCESSFUL_MESSAGE, Constants.LOGIC_EXCEPTION_CODE, string.Empty);
+          return CommandResult.Fail(Messages.OperationNotSuccessfulMessage, Constants.LOGIC_EXCEPTION_CODE, string.Empty);
         }
 
 
@@ -93,7 +93,7 @@ namespace CustomersTestApi.Domain.Handlers
 
         if (customer == null)
         {
-          Log.Information(Constants.LOGIC_EXCEPTION_CODE + "-" + Messages.OBJECT_EXISTS
+          Log.Information(Constants.LOGIC_EXCEPTION_CODE + "-" + Messages.ObjectExists
                           + $" - CustomerIdentification: {request.Customer.IdentificationNumber}"
                           + " - data: {@request} " + nameof(CreateCommandHandler), request);
 
