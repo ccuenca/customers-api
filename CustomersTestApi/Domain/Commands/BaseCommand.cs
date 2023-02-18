@@ -1,0 +1,29 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CustomersTestApi.Domain.Commands
+{
+  /// <summary>
+  /// 
+  /// </summary>
+  public class BaseCommand
+  {
+    /// <summary>
+    /// Gets or sets the name of the current user.
+    /// </summary>
+    /// <value>
+    /// The name of the current user.
+    /// </value>
+    [Required(ErrorMessage = "UserId is required")]
+    [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than zero")]
+    public int UserId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the test parameter.
+    /// </summary>
+    /// <value>
+    /// The test parameter.
+    /// </value>
+    public int TestParameter { get; set; }
+
+  }
+}

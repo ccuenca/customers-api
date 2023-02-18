@@ -1,0 +1,1117 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomersTestApi</name>
+    </assembly>
+    <members>
+        <member name="T:CustomersTestApi.Controllers.Base">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:CustomersTestApi.Controllers.Base.Error(System.String)">
+            <summary>
+            Returns the error500.
+            </summary>
+            <param name="message">The message.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.Base.Error(System.String,System.String)">
+            <summary>
+            Returns the error500.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="message">The message.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.Base.Error(CustomersTestApi.Domain.Commands.CommandResult)">
+            <summary>
+            Returns the error500.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.Base.CreatedResource(System.String,CustomersTestApi.Domain.Commands.CommandResult)">
+            <summary>
+            Creates the specified action.
+            </summary>
+            <param name="action">The action.</param>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomersTestApi.Controllers.CustomersController">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="F:CustomersTestApi.Controllers.CustomersController._mediator">
+            <summary>
+            The mediator
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Controllers.CustomersController._cache">
+            <summary>
+            The cache
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Controllers.CustomersController.cacheKey">
+            <summary>
+            The cache key
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.CustomersController.#ctor(MediatR.IMediator,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Controllers.CustomersController"/> class.
+            </summary>
+            <param name="mediator">The mediator.</param>
+            <param name="cache">The cache.</param>
+            <exception cref="T:System.ArgumentException">
+            mediator
+            or
+            cache
+            </exception>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.CustomersController.GetById(CustomersTestApi.Domain.Commands.GetByIdCommand)">
+            <summary>
+            Get a customer by id.
+            </summary>
+            <param name="command">The id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.CustomersController.Get(CustomersTestApi.Domain.Commands.GetAllCommand)">
+            <summary>
+            Get all customers.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.CustomersController.Create(CustomersTestApi.Domain.Commands.CreateCommand)">
+            <summary>
+            Create a customer.
+            </summary>
+            <param name="command">Customer object to create.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.CustomersController.Update(CustomersTestApi.Domain.Commands.UpdateCommand)">
+            <summary>
+            Update a customer.
+            </summary>
+            <param name="command">Customer object with new data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Controllers.CustomersController.Delete(CustomersTestApi.Domain.Commands.DeleteCommand)">
+            <summary>
+            Delete a customer.
+            </summary>
+            <param name="command">The delete parameters</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Commands.BaseCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.BaseCommand.UserId">
+            <summary>
+            Gets or sets the name of the current user.
+            </summary>
+            <value>
+            The name of the current user.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Commands.CommandResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.#ctor">
+            <summary>
+            Constructor por defecto.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.#ctor(System.String)">
+            <summary>
+            Constructor con razón de fallo.
+            </summary>
+            <param name="failureReason">Razón de fallo</param>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Commands.CommandResult"/> class.
+            </summary>
+            <param name="failureReason">The failure reason.</param>
+            <param name="code">The code.</param>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Commands.CommandResult"/> class.
+            </summary>
+            <param name="failureReason">The failure reason.</param>
+            <param name="code">The code.</param>
+            <param name="failureException">The failure exception.</param>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CommandResult.FailureReasonMessage">
+            <summary>
+            Propiedad que indica la Razón de fallo
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CommandResult.NoData">
+            <summary>
+            Gets or sets a value indicating whether [no data].
+            </summary>
+            <value>
+              <c>true</c> if [no data]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CommandResult.FailureReasonCode">
+            <summary>
+            Propiedad que indica la Razón de fallo
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CommandResult.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CommandResult.Data">
+            <summary>
+            Datos resultado de la ejecución del comando.
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CommandResult.FailureReasonExcepcion">
+            <summary>
+            Propiedad que indica la Razón de fallo mas detallada
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CommandResult.IsSuccess">
+            <summary>
+            Propiedad que indica si la ejecución fue correcta.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.Success">
+            <summary>
+            Metodo estatico que crea un resultado exitoso.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.Success(System.Object)">
+            <summary>
+            Metodo estatico que crea un resultado exitoso con datos de resultado.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.Success(System.Object,System.Object)">
+            <summary>
+            Successes the specified data.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.SuccessWithNoData">
+            <summary>
+            Successes the with no data.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.Fail(System.String)">
+            <summary>
+            Metodo estatico que crea un resultado fallido con razón de fallo.
+            </summary>
+            <param name="reason"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.Fail(System.String,System.String)">
+            <summary>
+            Metodo estatico que crea un resultado fallido con razón de fallo.
+            </summary>
+            <param name="reason"></param>
+            /// <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.Fail(System.String,System.String,System.String)">
+            <summary>
+            Metodo estatico que crea un resultado fallido con razón de fallo.
+            </summary>
+            <param name="reason"></param>
+            <param name="code"></param>
+            <param name="reasonExcepcion"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Commands.CommandResult.op_Implicit(CustomersTestApi.Domain.Commands.CommandResult)~System.Boolean">
+            <summary>
+            Metodo para comparación.
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Commands.CreateCommand">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:CustomersTestApi.Domain.Commands.BaseCommand" />
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.CreateCommand.Customer">
+            <summary>
+            Gets or sets the customer.
+            </summary>
+            <value>
+            The customer.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Commands.DeleteCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.DeleteCommand.CustomerId">
+            <summary>
+            Gets or sets the customer identifier.
+            </summary>
+            <value>
+            The customer identifier.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Commands.GetAllCommand">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:CustomersTestApi.Domain.Commands.BaseCommand" />
+        </member>
+        <member name="T:CustomersTestApi.Domain.Commands.GetByIdCommand">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:CustomersTestApi.Domain.Commands.BaseCommand" />
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.GetByIdCommand.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Commands.UpdateCommand">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:CustomersTestApi.Domain.Commands.BaseCommand" />
+        </member>
+        <member name="P:CustomersTestApi.Domain.Commands.UpdateCommand.Customer">
+            <summary>
+            Gets or sets the customer.
+            </summary>
+            <value>
+            The customer.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Handlers.CreateCommandHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.CreateCommandHandler._repository">
+            <summary>
+            The repository
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.CreateCommandHandler._generalConf">
+            <summary>
+            The general conf
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.CreateCommandHandler._mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.CreateCommandHandler.#ctor(AutoMapper.IMapper,CustomersTestApi.Persistance.Repositories.ICustomersRepository,Microsoft.Extensions.Options.IOptions{CustomersTestApi.Support.GeneralConf})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Handlers.CreateCommandHandler"/> class.
+            </summary>
+            <param name="mapper">The mapper.</param>
+            <param name="repository">The repository.</param>
+            <param name="conf">The conf.</param>
+            <exception cref="T:System.ArgumentNullException">
+            mapper
+            or
+            conf
+            </exception>
+            <exception cref="T:System.ArgumentException">repository</exception>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.CreateCommandHandler.Handle(CustomersTestApi.Domain.Commands.CreateCommand,System.Threading.CancellationToken)">
+            <summary>
+            Handles a request
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>
+            Response from the request
+            </returns>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Handlers.DeleteCommandHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.DeleteCommandHandler._repository">
+            <summary>
+            The repository
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.DeleteCommandHandler._generalConf">
+            <summary>
+            The general conf
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.DeleteCommandHandler._mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.DeleteCommandHandler.#ctor(AutoMapper.IMapper,CustomersTestApi.Persistance.Repositories.ICustomersRepository,Microsoft.Extensions.Options.IOptions{CustomersTestApi.Support.GeneralConf})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Handlers.DeleteCommandHandler"/> class.
+            </summary>
+            <param name="mapper">The mapper.</param>
+            <param name="repository">The repository.</param>
+            <param name="conf">The conf.</param>
+            <exception cref="T:System.ArgumentNullException">
+            mapper
+            or
+            conf
+            </exception>
+            <exception cref="T:System.ArgumentException">repository</exception>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.DeleteCommandHandler.Handle(CustomersTestApi.Domain.Commands.DeleteCommand,System.Threading.CancellationToken)">
+            <summary>
+            Handles a request
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>
+            Response from the request
+            </returns>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Handlers.GetAllCommandHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.GetAllCommandHandler._repository">
+            <summary>
+            The repository
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.GetAllCommandHandler._generalConf">
+            <summary>
+            The general conf
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.GetAllCommandHandler._mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.GetAllCommandHandler.#ctor(AutoMapper.IMapper,CustomersTestApi.Persistance.Repositories.ICustomersRepository,Microsoft.Extensions.Options.IOptions{CustomersTestApi.Support.GeneralConf})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Handlers.GetAllCommandHandler"/> class.
+            </summary>
+            <param name="mapper">The mapper.</param>
+            <param name="repository">The repository.</param>
+            <param name="conf">The conf.</param>
+            <exception cref="T:System.ArgumentNullException">
+            mapper
+            or
+            conf
+            </exception>
+            <exception cref="T:System.ArgumentException">repository</exception>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.GetAllCommandHandler.Handle(CustomersTestApi.Domain.Commands.GetAllCommand,System.Threading.CancellationToken)">
+            <summary>
+            Handles a request
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>
+            Response from the request
+            </returns>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler._repository">
+            <summary>
+            The repository
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler._generalConf">
+            <summary>
+            The general conf
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler._mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler.#ctor(AutoMapper.IMapper,CustomersTestApi.Persistance.Repositories.ICustomersRepository,Microsoft.Extensions.Options.IOptions{CustomersTestApi.Support.GeneralConf})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler"/> class.
+            </summary>
+            <param name="mapper">The mapper.</param>
+            <param name="repository">The repository.</param>
+            <param name="conf">The conf.</param>
+            <exception cref="T:System.ArgumentNullException">
+            mapper
+            or
+            conf
+            </exception>
+            <exception cref="T:System.ArgumentException">repository</exception>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.GetByIdCommandHandler.Handle(CustomersTestApi.Domain.Commands.GetByIdCommand,System.Threading.CancellationToken)">
+            <summary>
+            Handles a request
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>
+            Response from the request
+            </returns>
+        </member>
+        <member name="T:CustomersTestApi.Domain.Handlers.UpdateCommandHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.UpdateCommandHandler._repository">
+            <summary>
+            The repository
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.UpdateCommandHandler._generalConf">
+            <summary>
+            The general conf
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Domain.Handlers.UpdateCommandHandler._mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.UpdateCommandHandler.#ctor(AutoMapper.IMapper,CustomersTestApi.Persistance.Repositories.ICustomersRepository,Microsoft.Extensions.Options.IOptions{CustomersTestApi.Support.GeneralConf})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Domain.Handlers.UpdateCommandHandler"/> class.
+            </summary>
+            <param name="mapper">The mapper.</param>
+            <param name="repository">The repository.</param>
+            <param name="conf">The conf.</param>
+            <exception cref="T:System.ArgumentNullException">
+            mapper
+            or
+            conf
+            </exception>
+            <exception cref="T:System.ArgumentException">repository</exception>
+        </member>
+        <member name="M:CustomersTestApi.Domain.Handlers.UpdateCommandHandler.Handle(CustomersTestApi.Domain.Commands.UpdateCommand,System.Threading.CancellationToken)">
+            <summary>
+            Handles a request
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>
+            Response from the request
+            </returns>
+        </member>
+        <member name="T:CustomersTestApi.Dtos.CustomerDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.UniqueId">
+            <summary>
+            Gets or sets the unique identifier, for new customers send zero.
+            </summary>
+            <value>
+            The unique identifier.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.Names">
+            <summary>
+            Gets or sets the names.
+            </summary>
+            <value>
+            The names.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.SureNames">
+            <summary>
+            Gets or sets the sure names.
+            </summary>
+            <value>
+            The sure names.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.BirthDate">
+            <summary>
+            Gets or sets the birth date.
+            </summary>
+            <value>
+            The birth date.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.Address">
+            <summary>
+            Gets or sets the address.
+            </summary>
+            <value>
+            The address.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.EmailAddress">
+            <summary>
+            Gets or sets the email address.
+            </summary>
+            <value>
+            The email address.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.IdentificationNumber">
+            <summary>
+            Gets or sets the identification number.
+            </summary>
+            <value>
+            The identification number.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Dtos.CustomerDto.PhoneNumber">
+            <summary>
+            Gets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Model.Collection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Model.Collection.Count">
+            <summary>
+            Gets or sets the count.
+            </summary>
+            <value>
+            The count.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Collection.List">
+            <summary>
+            Gets or sets the data.
+            </summary>
+            <value>
+            The data.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Model.Customer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.UniqueId">
+            <summary>
+            Gets or sets the unique identifier.
+            </summary>
+            <value>
+            The unique identifier.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.Names">
+            <summary>
+            Gets or sets the names.
+            </summary>
+            <value>
+            The names.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.SureNames">
+            <summary>
+            Gets or sets the sure names.
+            </summary>
+            <value>
+            The sure names.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.CreatedDate">
+            <summary>
+            Gets or sets the created date.
+            </summary>
+            <value>
+            The created date.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.BirthDate">
+            <summary>
+            Gets or sets the birth date.
+            </summary>
+            <value>
+            The birth date.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.PhoneNumber">
+            <summary>
+            Gets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.Address">
+            <summary>
+            Gets or sets the address.
+            </summary>
+            <value>
+            The address.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.EmailAddress">
+            <summary>
+            Gets or sets the email address.
+            </summary>
+            <value>
+            The email address.
+            </value>
+        </member>
+        <member name="P:CustomersTestApi.Model.Customer.IdentificationNumber">
+            <summary>
+            Gets or sets the identification number.
+            </summary>
+            <value>
+            The identification number.
+            </value>
+        </member>
+        <member name="T:CustomersTestApi.Model.MappingProfile">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:CustomersTestApi.Model.MappingProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Model.MappingProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:CustomersTestApi.Persistance.CustomersContext">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="P:CustomersTestApi.Persistance.CustomersContext.Customers">
+            <summary>
+            Gets or sets the customers.
+            </summary>
+            <value>
+            The customers.
+            </value>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.CustomersContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Persistance.CustomersContext"/> class.
+            </summary>
+            <param name="options">The options for this context.</param>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.CustomersContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Override this method to further configure the model that was discovered by convention from the entity types
+            exposed in <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached
+            and re-used for subsequent instances of your derived context.
+            </summary>
+            <param name="modelBuilder">The builder being used to construct the model for this context. Databases (and other extensions) typically
+            define extension methods on this object that allow you to configure aspects of the model that are specific
+            to a given database.</param>
+            <remarks>
+            If a model is explicitly set on the options for this context (via <see cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />)
+            then this method will not be run.
+            </remarks>
+        </member>
+        <member name="T:CustomersTestApi.Persistance.Parameters">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Parameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Persistance.Parameters"/> class.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Parameters.CreateInputParameter(System.String,System.Object,System.Data.SqlDbType)">
+            <summary>
+            Creates the input parameter.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Parameters.CreateOutputParameter(System.String,System.Data.SqlDbType)">
+            <summary>
+            Creates the output parameter.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomersTestApi.Persistance.Procs">
+            <summary>
+            Class to define constants for stored procedures names
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Procs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Persistance.Procs"/> class.
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Persistance.Procs.GET_ALL_PROCEDURE">
+            <summary>
+            The get all procedure
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Persistance.Procs.GET_BY_UNIQUEID_PROCEDURE">
+            <summary>
+            The get by uniqueid procedure
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Persistance.Procs.CREATE_PROCEDURE">
+            <summary>
+            The create procedure
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Persistance.Procs.UPDATE_PROCEDURE">
+            <summary>
+            The update procedure
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Persistance.Procs.DELETE_PROCEDURE">
+            <summary>
+            The delete procedure
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Persistance.Procs.GET_BY_IDENTIFICATION_PROCEDURE">
+            <summary>
+            The get by identification procedure/
+            </summary>
+        </member>
+        <member name="T:CustomersTestApi.Persistance.Repositories.BaseRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Persistance.Repositories.BaseRepository._dbContext">
+            <summary>
+            The database context
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Persistance.Repositories.BaseRepository.InTransaction">
+            <summary>
+            Gets or sets a value indicating whether [in transaction].
+            </summary>
+            <value>
+              <c>true</c> if [in transaction]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.BaseRepository.BeginTransaction">
+            <summary>
+            Begins the transaction asynchronous.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.BaseRepository.CommitTransaction">
+            <summary>
+            Commits the transaction.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.BaseRepository.RollbackTransaction">
+            <summary>
+            Rollbacks the transaction.
+            </summary>
+        </member>
+        <member name="T:CustomersTestApi.Persistance.Repositories.CustomersRepository">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:CustomersTestApi.Persistance.Repositories.ICustomersRepository" />
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.CustomersRepository.#ctor(CustomersTestApi.Persistance.CustomersContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Persistance.Repositories.CustomersRepository"/> class.
+            </summary>
+            <param name="dbContext">The database context.</param>
+            <exception cref="T:System.ArgumentException">dbContext</exception>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.CustomersRepository.GetAll(System.Int32)">
+            <summary>
+            Gets all.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.CustomersRepository.GetById(System.Int32,System.Int32)">
+            <summary>
+            Gets the by identifier.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.CustomersRepository.Create(CustomersTestApi.Model.Customer,System.Int32)">
+            <summary>
+            Creates the specified customer.
+            </summary>
+            <param name="customer">The customer.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.CustomersRepository.Update(CustomersTestApi.Model.Customer,System.Int32)">
+            <summary>
+            Updates the specified customer.
+            </summary>
+            <param name="customer">The customer.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.CustomersRepository.Delete(System.Int32,System.Int32)">
+            <summary>
+            Deletes the specified customer identifier.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.CustomersRepository.GetByIdentificacion(System.String,System.Int32)">
+            <summary>
+            Gets the by identificacion.
+            </summary>
+            <param name="identification">The identification.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomersTestApi.Persistance.Repositories.IBaseRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.IBaseRepository.BeginTransaction">
+            <summary>
+            Begins the transaction.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.IBaseRepository.CommitTransaction">
+            <summary>
+            Commits the transaction.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.IBaseRepository.RollbackTransaction">
+            <summary>
+            Rollbacks the transaction.
+            </summary>
+        </member>
+        <member name="T:CustomersTestApi.Persistance.Repositories.ICustomersRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.ICustomersRepository.GetAll(System.Int32)">
+            <summary>
+            Gets all.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.ICustomersRepository.GetById(System.Int32,System.Int32)">
+            <summary>
+            Gets the by identifier.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.ICustomersRepository.Create(CustomersTestApi.Model.Customer,System.Int32)">
+            <summary>
+            Creates the specified customer.
+            </summary>
+            <param name="customer">The customer.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.ICustomersRepository.Update(CustomersTestApi.Model.Customer,System.Int32)">
+            <summary>
+            Updates the specified customer.
+            </summary>
+            <param name="customer">The customer.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.ICustomersRepository.Delete(System.Int32,System.Int32)">
+            <summary>
+            Deletes the specified customer identifier.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomersTestApi.Persistance.Repositories.ICustomersRepository.GetByIdentificacion(System.String,System.Int32)">
+            <summary>
+            Gets the by identificacion.
+            </summary>
+            <param name="identification">The identification.</param>
+            <param name="userId">The user identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomersTestApi.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Program.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Program"/> class.
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:CustomersTestApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomersTestApi.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CustomersTestApi.Startup.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="F:CustomersTestApi.Startup._env">
+            <summary>
+            The Env
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Startup"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="env">The env.</param>
+        </member>
+        <member name="M:CustomersTestApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:CustomersTestApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the specified application.
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+        <member name="T:CustomersTestApi.Support.Constants">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Support.Constants.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CustomersTestApi.Support.Constants"/> class.
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Constants.CONTROLLER_EXCEPTION_CODE">
+            <summary>
+            The controller exception code
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Constants.LOGIC_EXCEPTION_CODE">
+            <summary>
+            The controller exception code
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Constants.CONTROLLER__PARAMS_EXCEPTION_CODE">
+            <summary>
+            The controller parameters exception code
+            </summary>
+        </member>
+        <member name="T:CustomersTestApi.Support.GeneralConf">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CustomersTestApi.Support.Messages">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CustomersTestApi.Support.Messages.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.OPERATION_NOT_SUCCESSFUL_MESSAGE">
+            <summary>
+            The operation not successful message
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.OBJECT_EXISTS">
+            <summary>
+            The object exists
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.OBJECT_NOT_FOUND_MESSAGE">
+            <summary>
+            The object not found message
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.INVALID_CONTROLLER_PARAMETER">
+            <summary>
+            The invalid controller parameter
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.ERROR_STARTING_APP">
+            <summary>
+            The error starting application
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.STARTING_APP">
+            <summary>
+            The starting application
+            </summary>
+        </member>
+        <member name="F:CustomersTestApi.Support.Messages.PROCESSING_LOGIC_ERROR">
+            <summary>
+            The processing logic error
+            </summary>
+        </member>
+    </members>
+</doc>
